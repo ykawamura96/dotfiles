@@ -137,3 +137,21 @@ alias grep='grep --exclude-dir=.svn'
 ## SVN and SSH
 export SSH_USER="y-kawamura@jsk.imi.i.u-tokyo.ac.jp"
 export SVN_SSH="ssh -l ${SSH_USER}"
+
+# xdg-open
+alias open='xdg-open'
+
+# emacs
+alias e="emacs -nw "
+alias es="emacs -nw -f shell"
+alias emacs-nw="emacs -nw"
+alias eshel="emacs -nw -f shell"
+alias eshell="emacs -nw -f shell"
+alias emasc="emacs"
+alias emcas="emacs"
+alias eamcs="emacs"
+alias eamsc="emacs"
+
+# others
+alias jmanual='open /opt/ros/kinetic/share/jskeus/doc/jmanual.pdf'
+alias grep='grep --color'
