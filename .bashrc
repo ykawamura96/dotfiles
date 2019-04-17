@@ -117,15 +117,6 @@ if ! shopt -oq posix; then
 fi
 
 
-# history search bindkey
-_replace_by_history() {
-    local l=$(HISTTIMEFORMAT= history | tac | sed -e 's/^\s*[0-9]\+\s\+//' | percol --query "$READLINE_LINE")
-    READLINE_LINE="$l"
-    READLINE_POINT=${#l}
-    }
-bind -x '"\C-r": _replace_by_history'
-source /opt/ros/kinetic/setup.bash
-#source ~/ros/kinetic/devel/setup.bash
 source ~/catkin_ws/devel/setup.bash
 
 ## Alias Commands
