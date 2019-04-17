@@ -1,3 +1,6 @@
+[alias]
+    sgl = log --oneline --graph --all --decorate
+    st = status
 [http]
 	sslVerify = false
 [user]
