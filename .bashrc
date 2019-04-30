@@ -126,7 +126,7 @@ _replace_by_history() {
     READLINE_POINT=${#l}
     }
 bind -x '"\C-r": _replace_by_history'
-source /opt/ros/kinetic/setup.bash
+
 source ~/catkin_ws/devel/setup.bash
 
 ## Alias Commands

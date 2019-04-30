@@ -162,10 +162,11 @@
 (add-to-list 'load-path "/home/ykawamura/euslime_dir/euslime")
 (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime-repl-ansi-color")
 (require 'slime-autoloads)
-(require 'euslime)
-(setq inferior-lisp-program "sbcl")
-(setq inferior-euslisp-program "roseus")
-(setq slime-contribs '(slime-fancy slime-repl-ansi-color))
+
+;; (require 'euslime)
+;; (setq inferior-lisp-program "sbcl")
+;; (setq inferior-euslisp-program "roseus")
+;; (setq slime-contribs '(slime-fancy slime-repl-ansi-color))
 
 
 ;; jks standard
@@ -176,3 +177,12 @@
 ;;; time
 (load "time" t t)
 (display-time)
+
+;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime")
+;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/euslime")
+;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime-repl-ansi-color")
+;; (require 'slime-autoloads)
+;; (require 'euslime)
+;; (setq inferior-lisp-program "sbcl")
+;; (setq inferior-euslisp-program "roseus")
+;; (setq slime-contribs '(slime-fancy slime-repl-ansi-color))
