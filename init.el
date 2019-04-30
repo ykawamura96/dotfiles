@@ -11,7 +11,7 @@
 ;;日本語フォントの設定
 (set-fontset-font t 'japanese-jisx0208 "TakaoPGothic")
 
-
+(load-theme 'monokai t)
 
 ;;powerllinesce
 (require 'powerline)
@@ -138,6 +138,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
  '(inhibit-startup-screen t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -145,6 +148,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;;minimap
+(require 'minimap)
+
+;;roseamcs
+(add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
+;; or whatever your install space is + "/share/emacs/site-lisp"
+(require 'rosemacs-config)
 
 ;; euslime
 (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime")
@@ -155,3 +166,13 @@
 (setq inferior-lisp-program "sbcl")
 (setq inferior-euslisp-program "roseus")
 (setq slime-contribs '(slime-fancy slime-repl-ansi-color))
+
+
+;; jks standard
+(global-set-key "\C-h" 'backward-delete-char)
+(global-set-key "\M-g" 'goto-line)
+(global-set-key "\C-xL" 'goto-line)
+
+;;; time
+(load "time" t t)
+(display-time)

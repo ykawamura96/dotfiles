@@ -3,10 +3,12 @@
 # for examples
 
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# case $- in
+#     *i*) ;;
+#       *) return;;
+# esac
+
+[ -z "$PS1" ] && return
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -125,7 +127,6 @@ _replace_by_history() {
     }
 bind -x '"\C-r": _replace_by_history'
 source /opt/ros/kinetic/setup.bash
-#source ~/ros/kinetic/devel/setup.bash
 source ~/catkin_ws/devel/setup.bash
 
 ## Alias Commands
@@ -155,3 +156,10 @@ alias eamsc="emacs"
 # others
 alias jmanual='open /opt/ros/kinetic/share/jskeus/doc/jmanual.pdf'
 alias grep='grep --color'
+
+export ROBOT=HRP2JSKNTS
+export HRP2NO=17
+
+# gazebo model path
+# export GAZEBO_MODEL_PATH="{$HOME}/catkin_ws/src/rtm-ros-robotics/rtmros_tutorials/hrpsys_gazebo_tutorials"
+export GAZEO_MODEL_PAHT="${HOME}/catkin_ws/src/jsk-ros-pkg/jsk_model_tools/eusurdf/models"
