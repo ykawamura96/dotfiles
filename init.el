@@ -113,6 +113,7 @@
 (set-face-attribute 'show-paren-match nil
                     :inherit 'highlight)
 
+
 ;; シフト＋矢印で範囲選択
 (setq pc-select-selection-keys-only t)
 
