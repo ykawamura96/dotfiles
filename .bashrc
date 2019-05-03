@@ -8,7 +8,8 @@
 #       *) return;;
 # esac
 
- [ -z "$PS1" ] && return 
+
+[ -z "$PS1" ] && return
 
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -119,6 +120,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
 source /opt/ros/kinetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
 
@@ -162,3 +164,7 @@ alias grep='grep --color'
 
 export ROBOT=HRP2JSKNTS
 export HRP2NO=17
+
+# gazebo model path
+# export GAZEBO_MODEL_PATH="{$HOME}/catkin_ws/src/rtm-ros-robotics/rtmros_tutorials/hrpsys_gazebo_tutorials"
+export GAZEO_MODEL_PAHT="${HOME}/catkin_ws/src/jsk-ros-pkg/jsk_model_tools/eusurdf/models"
