@@ -3,10 +3,13 @@
 # for examples
 
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# case $- in
+#     *i*) ;;
+#       *) return;;
+# esac
+
+ [ -z "$PS1" ] && return 
+
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -116,8 +119,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
+source /opt/ros/kinetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
+
+# history search bindkey
+_replace_by_history() {
+    local l=$(HISTTIMEFORMAT= history | tac | sed -e 's/^\s*[0-9]\+\s\+//' | percol --query "$READLINE_LINE")
+    READLINE_LINE="$l"
+    READLINE_POINT=${#l}
+}
+bind -x '"\C-r": _replace_by_history'
+
+    
 
 ## Alias Commands
 alias rm='rm -i'
@@ -146,3 +159,6 @@ alias eamsc="emacs"
 # others
 alias jmanual='open /opt/ros/kinetic/share/jskeus/doc/jmanual.pdf'
 alias grep='grep --color'
+
+export ROBOT=HRP2JSKNTS
+export HRP2NO=17
