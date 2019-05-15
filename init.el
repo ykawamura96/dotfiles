@@ -11,6 +11,7 @@
 ;;日本語フォントの設定
 (set-fontset-font t 'japanese-jisx0208 "TakaoPGothic")
 
+
 (load-theme 'monokai t)
 
 ;;powerllinesce
@@ -143,6 +144,7 @@
    (quote
     ("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
  '(inhibit-startup-screen t))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -150,15 +152,21 @@
  ;; If there is more than one, they won't work right.
  )
 
+
+;;ehistにbackupを保存
+ (setq backup-directory-alist '((".*" . "~/.ehist")))
+
+;; rosemacs
+(add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
+;; or whatever your install space is + "/share/emacs/site-lisp"
+(require 'rosemacs-config)
+
 ;;minimap
 (require 'minimap)
 
 ;;roseamcs
 (add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
 (require 'rosemacs-config)
-
-;; euslime
-
 
 ;; jks standard
 (global-set-key "\C-h" 'backward-delete-char)
@@ -169,6 +177,7 @@
 (load "time" t t)
 (display-time)
 
+;; euslime
 ;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime")
 ;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/euslime")
 ;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime-repl-ansi-color")

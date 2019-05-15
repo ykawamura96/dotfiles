@@ -8,7 +8,9 @@
 #       *) return;;
 # esac
 
+
 [ -z "$PS1" ] && return
+
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -119,15 +121,18 @@ if ! shopt -oq posix; then
 fi
 
 
+source /opt/ros/kinetic/setup.bash
+source ~/catkin_ws/devel/setup.bash
+
 # history search bindkey
 _replace_by_history() {
     local l=$(HISTTIMEFORMAT= history | tac | sed -e 's/^\s*[0-9]\+\s\+//' | percol --query "$READLINE_LINE")
     READLINE_LINE="$l"
     READLINE_POINT=${#l}
-    }
+}
 bind -x '"\C-r": _replace_by_history'
 
-source ~/catkin_ws/devel/setup.bash
+    
 
 ## Alias Commands
 alias rm='rm -i'
