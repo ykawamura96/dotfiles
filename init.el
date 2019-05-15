@@ -155,19 +155,9 @@
 
 ;;roseamcs
 (add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
-;; or whatever your install space is + "/share/emacs/site-lisp"
 (require 'rosemacs-config)
 
 ;; euslime
-(add-to-list 'load-path "/home/ykawamura/euslime_dir/slime")
-(add-to-list 'load-path "/home/ykawamura/euslime_dir/euslime")
-(add-to-list 'load-path "/home/ykawamura/euslime_dir/slime-repl-ansi-color")
-(require 'slime-autoloads)
-
-;; (require 'euslime)
-;; (setq inferior-lisp-program "sbcl")
-;; (setq inferior-euslisp-program "roseus")
-;; (setq slime-contribs '(slime-fancy slime-repl-ansi-color))
 
 
 ;; jks standard
@@ -187,3 +177,7 @@
 ;; (setq inferior-lisp-program "sbcl")
 ;; (setq inferior-euslisp-program "roseus")
 ;; (setq slime-contribs '(slime-fancy slime-repl-ansi-color))
+(defun set-alpha (alpha-num)
+  "set frame parameter 'alpha"
+  (interactive "nAlpha: ")
+    (set-frame-parameter nil 'alpha (cons alpha-num '(90))))
