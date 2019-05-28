@@ -167,4 +167,5 @@ export HRP2NO=17
 
 # gazebo model path
 # export GAZEBO_MODEL_PATH="{$HOME}/catkin_ws/src/rtm-ros-robotics/rtmros_tutorials/hrpsys_gazebo_tutorials"
-export GAZEO_MODEL_PAHT="${HOME}/catkin_ws/src/jsk-ros-pkg/jsk_model_tools/eusurdf/models"
+export GAZEO_MODEL_PATH="${HOME}/catkin_ws/src/jsk-ros-pkg/jsk_model_tools/eusurdf/models"
+export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-7
