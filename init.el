@@ -11,8 +11,7 @@
 ;;日本語フォントの設定
 (set-fontset-font t 'japanese-jisx0208 "TakaoPGothic")
 
-
-(load-theme 'monokai t)
+(load-theme 'tango-dark t)
 
 ;;powerllinesce
 (require 'powerline)
@@ -131,8 +130,7 @@
 (global-set-key (kbd "<M-up>")    'windmove-up)
 (global-set-key (kbd "<M-right>") 'windmove-right)
 
-(global-set-key "\C-h" 'backward-delete-char)
-
+(define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 ;;矩形選択の先頭に文字列を挿入
 (global-set-key (kbd "C-x a") 'string-rectangle)
 (custom-set-variables
@@ -169,7 +167,6 @@
 (require 'rosemacs-config)
 
 ;; jks standard
-(global-set-key "\C-h" 'backward-delete-char)
 (global-set-key "\M-g" 'goto-line)
 (global-set-key "\C-xL" 'goto-line)
 
