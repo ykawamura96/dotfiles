@@ -11,8 +11,7 @@
 ;;日本語フォントの設定
 (set-fontset-font t 'japanese-jisx0208 "TakaoPGothic")
 
-
-(load-theme 'monokai t)
+(load-theme 'tango-dark t)
 
 ;;powerllinesce
 (require 'powerline)
@@ -131,8 +130,7 @@
 (global-set-key (kbd "<M-up>")    'windmove-up)
 (global-set-key (kbd "<M-right>") 'windmove-right)
 
-(global-set-key "\C-h" 'backward-delete-char)
-
+(define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 ;;矩形選択の先頭に文字列を挿入
 (global-set-key (kbd "C-x a") 'string-rectangle)
 (custom-set-variables
@@ -166,23 +164,9 @@
 
 ;;roseamcs
 (add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
-;; or whatever your install space is + "/share/emacs/site-lisp"
 (require 'rosemacs-config)
 
-;; euslime
-;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime")
-;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/euslime")
-;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime-repl-ansi-color")
-;; (require 'slime-autoloads)
-
-;; (require 'euslime)
-;; (setq inferior-lisp-program "sbcl")
-;; (setq inferior-euslisp-program "roseus")
-;; (setq slime-contribs '(slime-fancy slime-repl-ansi-color))
-
-
 ;; jks standard
-(global-set-key "\C-h" 'backward-delete-char)
 (global-set-key "\M-g" 'goto-line)
 (global-set-key "\C-xL" 'goto-line)
 
@@ -190,6 +174,7 @@
 (load "time" t t)
 (display-time)
 
+;; euslime
 ;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime")
 ;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/euslime")
 ;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime-repl-ansi-color")
@@ -198,4 +183,7 @@
 ;; (setq inferior-lisp-program "sbcl")
 ;; (setq inferior-euslisp-program "roseus")
 ;; (setq slime-contribs '(slime-fancy slime-repl-ansi-color))
-
+(defun set-alpha (alpha-num)
+  "set frame parameter 'alpha"
+  (interactive "nAlpha: ")
+    (set-frame-parameter nil 'alpha (cons alpha-num '(90))))
