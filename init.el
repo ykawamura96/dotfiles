@@ -1,9 +1,17 @@
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(package-initialize)
 (when (< emacs-major-version 24)S
   ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+      (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(when (require 'package)
+  (add-to-list
+   'package-archives
+   '("melpa" . "http://melpa.milkbox.net/packages/") t)
+     )
 (package-initialize) ;; You might already have this line
 
 (setq load-path (cons "~/.emacs.d/elpa" load-path))
@@ -15,7 +23,7 @@
 
 ;;powerllinesce
 (require 'powerline)
- 
+
 (defun powerline-my-theme ()
   "Setup the my mode-line."
   (interactive)
@@ -46,12 +54,12 @@
                           (rhs (list (powerline-raw "%4l")
                                      (powerline-raw ":")
                                      (powerline-raw "%2c")
-                                     (powerline-raw " | ")                                  
+                                     (powerline-raw " | ")
                                      (powerline-raw "%6p")
                                      (powerline-raw " ")
                                      )))
                      (concat (powerline-render lhs)
-                             (powerline-fill nil (powerline-width rhs)) 
+                             (powerline-fill nil (powerline-width rhs))
                              (powerline-render rhs)))))))
 
 (defun make/set-face (face-name fg-color bg-color weight)
@@ -67,6 +75,51 @@
 
 ;;anzu
 (global-anzu-mode +1)
+;; irony-mode
+(eval-after-load "irony"
+  '(progn
+     (custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
+     (add-to-list 'company-backends 'company-irony)
+     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+     (add-hook 'c-mode-common-hook 'irony-mode)))
+;;elpy
+(elpy-enable)
+(when (require 'flycheck nil t)
+  (remove-hook 'elpy-modules 'elpy-module-flymake)
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
+;; (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode 1)))
+
+;; (el-get-bundle! python-mode)
+;; (setq auto-mode-alist (cons '("\\.py\\'" . python-mode) auto-mode-alist))
+
+;; (el-get-bundle! elpy
+;; 		(elpy-enable)
+;; 		(setq elpy-rpc-backend "jedi")
+;; 		(add-hook 'elpy-mode-hook
+;; 			  '(lambda ()
+;; 			     (auto-complete-mode -1)
+;; 			     (define-key company-active-map (kbd "C-n") 'company-select-next)
+;; 			     (define-key company-active-map (kbd "C-p") 'company-select-previous)
+;; 			     (define-key company-active-map (kbd "<tab>") 'company-complete))))
+
+;;company
+(with-eval-after-load 'company
+  (setq company-selection-wrap-around t) ; 候補の最後の次は先頭に戻る
+  ;; C-n, C-pで補完候補を次/前の候補を選択
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  (define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
+  (define-key company-active-map (kbd "C-h") nil) ;; C-hはバックスペース割当のため無効化
+  (define-key company-active-map (kbd "C-S-h") 'company-show-doc-buffer) ;; ドキュメント表示はC-Shift-h
+  ;; スクロールバー
+  (set-face-attribute 'company-scrollbar-fg nil
+		      :background "#4cd0c1")
+  ;; スクロールバー背景
+  (set-face-attribute 'company-scrollbar-bg nil
+		      :background "#002b37")
+  )
+
+(global-company-mode) ; 全バッファで有効にする
 
 ;;rainbow-deiminaters
 (require 'rainbow-delimiters)
@@ -87,7 +140,6 @@
 ;;bash-completion
 (require 'bash-completion)
 (bash-completion-setup)
-
 
 ;; メニューバーを消
 ;;(menu-bar-mode -1)
@@ -114,6 +166,11 @@
                     :inherit 'highlight)
 
 
+;; バッファ切り替え色々
+;; (global-set-key (kbd "M-[") 'switch-to-prev-buffer)
+;; (global-set-key (kbd "M-]") 'switch-to-next-buffer)
+
+
 ;; シフト＋矢印で範囲選択
 (setq pc-select-selection-keys-only t)
 
@@ -133,6 +190,7 @@
 (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 ;;矩形選択の先頭に文字列を挿入
 (global-set-key (kbd "C-x a") 'string-rectangle)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -140,7 +198,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
+    ("bf5bdab33a008333648512df0d2b9d9710bdfba12f6a768c7d2c438e1092b633" "bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
  '(inhibit-startup-screen t))
 
 (custom-set-faces
@@ -175,15 +233,64 @@
 (display-time)
 
 ;; euslime
-;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime")
-;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/euslime")
-;; (add-to-list 'load-path "/home/ykawamura/euslime_dir/slime-repl-ansi-color")
-;; (require 'slime-autoloads)
-;; (require 'euslime)
-;; (setq inferior-lisp-program "sbcl")
-;; (setq inferior-euslisp-program "roseus")
-;; (setq slime-contribs '(slime-fancy slime-repl-ansi-color))
+(add-to-list 'load-path "/home/y-kawamura/euslime_dir/slime")
+(add-to-list 'load-path "/home/y-kawamura/euslime_dir/euslime")
+(add-to-list 'load-path "/home/y-kawamura/euslime_dir/slime-repl-ansi-color")
+(require 'slime-autoloads)
+(require 'euslime)
+(setq inferior-lisp-program "sbcl")
+(setq inferior-euslisp-program "roseus")
+(setq slime-contribs '(slime-fancy slime-repl-ansi-color slime-banner))
+
 (defun set-alpha (alpha-num)
   "set frame parameter 'alpha"
   (interactive "nAlpha: ")
     (set-frame-parameter nil 'alpha (cons alpha-num '(90))))
+
+;; タブにスペースを使用する
+(setq-default tab-width 4 indent-tabs-mode nil)
+
+
+;;
+;; whitespace
+;;
+(require 'whitespace)
+(setq whitespace-style '(face           ; faceで可視化
+                         trailing       ; 行末
+                         tabs           ; タブ
+;;                         empty          ; 先頭/末尾の空行
+                         space-mark     ; 表示のマッピング
+                         tab-mark
+                         ))
+
+(setq whitespace-display-mappings
+      '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+
+(global-whitespace-mode 1)
+
+;;
+;; saveする前に行末のwhite space を消す
+;;
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+
+;; markdown mode
+;; (use-package markdown-mode
+;;              :ensure t
+;;              :commands (markdown-mode gfm-mode)
+;;              :mode (("README\\.md\\'" . gfm-mode)
+;;                     ("\\.md\\'" . markdown-mode)
+;;                     ("\\.markdown\\'" . markdown-mode))
+;;              :init (setq markdown-command "multimarkdown"))
+
+
+;; カーソルを固定したままスクロール
+(global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
+(global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
+
+;; spell check
+(setq-default ispell-program-name "aspell")
+(eval-after-load "ispell"
+  '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
+;;
+(global-set-key (kbd "C-M-$") 'ispell-complete-word)

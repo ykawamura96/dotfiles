@@ -20,8 +20,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=100000
+HISTFILESIZE=200000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -60,8 +60,15 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+#
+function parse_git_branch {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+}
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[\e[32m\]\t\[\e[m\] \[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ ' 
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[\033[01;31m\]\D{%F %T}$(parse_git_branch)\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -123,6 +130,7 @@ fi
 
 source /opt/ros/kinetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
+# source ~/smach_ws/devel/setup.bash
 
 # history search bindkey
 _replace_by_history() {
@@ -169,3 +177,14 @@ export HRP2NO=17
 # export GAZEBO_MODEL_PATH="{$HOME}/catkin_ws/src/rtm-ros-robotics/rtmros_tutorials/hrpsys_gazebo_tutorials"
 export GAZEO_MODEL_PATH="${HOME}/catkin_ws/src/jsk-ros-pkg/jsk_model_tools/eusurdf/models"
 export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-7
+
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export PATH=/usr/local/cuda/bin:/opt/ros/kinetic/share/euslisp/jskeus/eus//Linux64/bin:/home/y-kawamura/catkin_ws/devel/bin:/opt/ros/kinetic/bin:/opt/ros/kinetic/share/euslisp/jskeus/eus//Linux64/bin:/home/y-kawamura/bin:/home/y-kawamura/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:~/.local/bin
+
+export EDITOR='emacs -nw'
+
+
+# ISHIDA JUMP JUMP
+alias jj="roscd hrp2_kannna/scripts/test/"
+
