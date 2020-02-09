@@ -1,4 +1,5 @@
 (require 'package) ;; You might already have this line
+
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
@@ -292,5 +293,18 @@
 (setq-default ispell-program-name "aspell")
 (eval-after-load "ispell"
   '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
-;;
+
+;; ispll
 (global-set-key (kbd "C-M-$") 'ispell-complete-word)
+
+;;markdown
+;; (use-package markdown-mode
+;;              :ensure t
+;;              :commands (markdown-mode gfm-mode)
+;;              :mode (("README\\.md\\'" . gfm-mode)
+;;                     ("\\.md\\'" . markdown-mode)
+;;                     ("\\.markdown\\'" . markdown-mode))
+;;                :init (setq markdown-command "multimarkdown"))
+;; (setq markdown-enable-math t)
+;; (setq markdown-preview-stylesheets (list "github.css"))
+;; (add-to-list 'markdown-preview-javascript "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
